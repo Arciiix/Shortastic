@@ -11,35 +11,169 @@
   background-color: #2b2f36;
   background-image: url("./backgroundImage.min.jpg");
 
-  z-index: -1;
-
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   border: 0 !important;
+
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.backgroundImage::before {
-  content: "";
-  width: 100vw;
-  height: 100vh;
+.urlDiv {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 60%;
+}
 
-  z-index: -1;
+.urlInput {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid white;
+  outline: 0;
+  font-size: 1.3rem;
+  color: white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.5s;
+}
+.urlInput::placeholder {
+  color: transparent;
+}
+.urlInput:placeholder-shown ~ .inputLabel {
+  font-size: 1.3rem;
+  cursor: text;
+  top: 20px;
+}
 
+.inputLabel {
   position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: white;
 
-  -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  -o-filter: blur(5px);
-  -ms-filter: blur(5px);
-  filter: blur(5px);
-
-  background-image: url("./backgroundImage.min.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-
-  border: 0 !important;
+  user-select: none;
 }
-.backgroundImage {
-  display: flex;
+
+.urlInput:focus {
+  padding-bottom: 6px;
+
+  border-width: 3px;
+  border-image: linear-gradient(to right, #11998e, #38ef7d);
+  border-image-slice: 1;
+}
+.urlInput:focus ~ .inputLabel {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #11998e;
+  font-weight: 700;
+}
+
+/* reset input */
+.urlInput:required,
+.urlInput:invalid {
+  box-shadow: none;
+}
+.button {
+  margin: 30px;
+}
+.submit {
+  width: 200px;
+  height: 55px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  background-size: 400% 100%;
+
+  border-radius: 50px;
+  transition: all 0.4s ease-in-out;
+  background-image: linear-gradient(
+    to right,
+    #209cd1,
+    #40e495,
+    #205ed1,
+    #049166,
+    #03399c,
+    #01694a
+  );
+  box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+
+  outline: none;
+}
+
+.submit:hover {
+  background-position: 50% 0;
+  transition: all 0.4s ease-in-out;
+}
+.submit:active {
+  background-position: 100% 0;
+  transition: all 0.05s ease-in-out;
+}
+
+.submit:focus,
+.submit:hover,
+.submit:active,
+.button:focus,
+.button:hover,
+.button:active {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.finalLink {
+  color: white;
+  position: absolute;
+  bottom: 5px;
+  text-align: center;
+}
+
+.errorLabel {
+  color: rgb(243, 3, 75);
+}
+.urlInput:focus ~ .errorLabel {
+  color: rgb(243, 3, 75);
+}
+
+.errorInput {
+  border-bottom: 2px solid rgb(243, 3, 75);
+}
+.errorInput:focus {
+  border-image: none;
+  border-bottom: 2px solid rgb(243, 3, 75);
+}
+
+@media only screen and (max-width: 600px) {
+  .urlDiv {
+    width: 90%;
+  }
+  .finalLink {
+    font-size: 4vw;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .urlDiv {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .urlDiv {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .urlDiv {
+    width: 60%;
+  }
 }
