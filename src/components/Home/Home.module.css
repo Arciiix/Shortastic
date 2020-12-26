@@ -1,14 +1,45 @@
 .container {
   display: flex;
-  background-image: url("./backgroundImage.jpg");
-  background-color: #2b2f36;
-  background-repeat: no-repeat;
-  background-size: cover;
 
+  overflow: auto;
   width: 100vw;
   height: 100vh;
   max-width: 100vw;
   max-height: 100vh;
 
   color: white;
+  background-color: #2b2f36;
+  background-image: url("./backgroundImage.min.jpg");
+
+  z-index: -1;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border: 0 !important;
+}
+.backgroundImage::before {
+  content: "";
+  width: 100vw;
+  height: 100vh;
+
+  z-index: -1;
+
+  position: absolute;
+
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+
+  background-image: url("./backgroundImage.min.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  border: 0 !important;
+}
+.backgroundImage {
+  display: flex;
 }
