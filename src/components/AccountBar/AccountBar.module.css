@@ -1,0 +1,48 @@
+.AccountBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  gap: 5px;
+}
+.icon {
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  width: 40px;
+  transition: 0.2s;
+}
+.icon:hover {
+  filter: invert(15%);
+  cursor: pointer;
+}
+.icon:active,
+.icon:focus {
+  filter: invert(40%);
+}
+.accountName {
+  font-size: 30px;
+  text-align: center;
+  transition: 0.2s;
+}
+.accountName:hover {
+  color: rgb(223, 221, 221);
+}
+.accountName:active {
+  color: rgb(180, 179, 179);
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

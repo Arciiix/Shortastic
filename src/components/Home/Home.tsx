@@ -2,6 +2,8 @@ import React from "react";
 
 import styles from "./Home.module.css";
 
+import AccountBar from "../AccountBar/AccountBar";
+
 interface HomeState {
   isAvailable: boolean;
 }
@@ -17,6 +19,7 @@ class Home extends React.Component<any, HomeState> {
   render() {
     return (
       <div className={styles.container}>
+        <AccountBar isLogged={false} />
         <div className={styles.urlDiv}>
           <input
             type="text"
