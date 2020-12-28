@@ -1,0 +1,156 @@
+.container {
+  display: flex;
+
+  overflow: auto;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+
+  color: white;
+  background-color: #2b2f36;
+  background-image: url("./backgroundSummary.min.jpg");
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border: 0 !important;
+
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.summary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #ffffff;
+  width: auto;
+  text-align: center;
+  max-width: 80vw;
+  padding: 20px 100px;
+}
+
+.generatedLink {
+  color: black;
+  font-size: 50px;
+  white-space: -moz-pre-wrap !important; /* Mozilla */
+  white-space: -webkit-pre-wrap; /* Chrome & Safari */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  white-space: pre-wrap; /* CSS3 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  word-break: break-all;
+  white-space: normal;
+}
+
+.buttonDiv {
+  margin: 10px;
+}
+.button {
+  width: 200px;
+  height: 55px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  background-size: 400% 100%;
+
+  border-radius: 50px;
+  transition: all 0.4s ease-in-out;
+  background-image: linear-gradient(
+    to right,
+    #209cd1,
+    #40e495,
+    #205ed1,
+    #049166,
+    #03399c,
+    #01694a
+  );
+  box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+
+  outline: none;
+}
+
+.button:hover {
+  background-position: 50% 0;
+  transition: all 0.4s ease-in-out;
+}
+.button:active {
+  background-position: 100% 0;
+  transition: all 0.05s ease-in-out;
+}
+
+.button:focus,
+.button:hover,
+.button:active,
+.button:focus,
+.button:hover,
+.button:active {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.loggedAs,
+.login {
+  font-size: 22.5px;
+  color: #5a5959;
+}
+.login {
+  font-weight: 500;
+}
+
+.generatedLinkLink {
+  color: black !important;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.accountSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 600px) {
+  .generatedLink {
+    font-size: 20px;
+  }
+  .summary {
+    padding: 5px 10px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .generatedLink {
+    font-size: 28.5px;
+  }
+  .summary {
+    padding: 10px 15px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .generatedLink {
+    font-size: 35px;
+  }
+  .summary {
+    padding: 20px 30px;
+  }
+}
+@media only screen and (max-height: 500px) {
+  .generatedLink {
+    font-size: 15px;
+  }
+  .summary {
+    padding: 5px;
+  }
+}
