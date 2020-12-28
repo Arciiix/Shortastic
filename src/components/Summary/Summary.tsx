@@ -2,7 +2,6 @@ import { withRouter } from "react-router-dom";
 import React from "react";
 
 import styles from "./Summary.module.css";
-import { HighlightSpanKind } from "typescript";
 
 interface SummaryState {
   shortenedLink: string;

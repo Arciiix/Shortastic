@@ -21,6 +21,7 @@ class AccountBar extends React.Component<AccountBarProps, any> {
             src={accountIcon}
             alt="Konto"
             title="Konto"
+            width={"40px"}
           />
           <span className={styles.accountName} title="Konto">
             {this.props.accountName ? this.props.accountName : "Zaloguj się"}
@@ -32,6 +33,7 @@ class AccountBar extends React.Component<AccountBarProps, any> {
             src={logoutIcon}
             alt={this.props.isLogged ? "Wyloguj się" : "Zaloguj się"}
             title={this.props.isLogged ? "Wyloguj się" : "Zaloguj się"}
+            width={"40px"}
           />
         </Link>
       </div>
