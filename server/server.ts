@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const appRoutes = ["/", "/summary"];
 
-app.post("/api/createShortenedLink", (req, res) => {
+app.post("/api/createShortenedLink", async (req, res) => {
   if (!req.body.short || !req.body.full) {
     return res.sendStatus(400);
   }
@@ -38,10 +38,39 @@ app.post("/api/createShortenedLink", (req, res) => {
     return res.sendStatus(400);
   }
 
-  res.sendStatus(200);
-
-  console.log(req.body);
+  //Check if the alias (shortcut) for the link already exist
+  let rows = await getTheURL(req.body.short);
+  if (rows.length !== 0) {
+    return res.json({ ok: false, message: "The account already exist" });
+  } else {
+    await createTheURL(req.body.short, req.body.full);
+    res.sendStatus(200);
+  }
 });
+
+function getTheURL(short: string): Promise<any> {
+  return new Promise((resolve, reject) => {
+    db.all(`SELECT * FROM URLs WHERE shortenedLink = ?`, short, (err, rows) => {
+      if (err)
+        reject(log(`Error while getting data from the database: ${err}`));
+      resolve(rows);
+    });
+  });
+}
+
+function createTheURL(short: string, full: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    //DEV TODO: Pass the correct accountId, isProtected and password values
+    db.run(
+      `INSERT INTO URLs (id, shortenedLink, fullLink, accountId, isProtected, password) VALUES (?, ?, ?, ?, ?, ?)`,
+      [null, short, full, null, false, null],
+      (err) => {
+        if (err) reject(log(`Error while inserting into the database: ${err}`));
+        resolve();
+      }
+    );
+  });
+}
 
 app.all(appRoutes, (req, res) => {
   //DEV TODO: Send the React app
