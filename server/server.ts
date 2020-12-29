@@ -13,13 +13,19 @@ const db = new sqlite3.Database("./db.db", (err) => {
 const app = express();
 const PORT = process.env.PORT || 5434; //DEV
 
-app.use(bodyParser.urlencoded({ extended: true }));
+//DEV
+//Risky and only during development
+const cors = require("cors");
+app.use(cors());
+
+app.use(bodyParser.json());
 
 const appRoutes = ["/", "/summary"];
 
 app.post("/api/createShortenedLink", async (req, res) => {
   if (!req.body.short || !req.body.full) {
-    return res.sendStatus(400);
+    log(`Error while creating link: noParams`, true);
+    return res.send({ ok: false, error: "noParams" });
   }
 
   const urlRegExp = new RegExp(
@@ -30,21 +36,27 @@ app.post("/api/createShortenedLink", async (req, res) => {
 
   //Validate the full url (or ip)
   if (!urlRegExp.test(req.body.full) && !ipRegExp.test(req.body.full)) {
-    return res.sendStatus(400);
+    log(`Error while creating link: fullUrlIsntValid (${req.body.full})`, true);
+    return res.send({ ok: false, error: "fullUrlIsntValid" });
   }
 
   //Validate the alias (shortcut)
-  if (!new RegExp(/^[-a-zA-Z0-9()@:%_\+.~#//=]+$/g).test(req.body.short)) {
-    return res.sendStatus(400);
+  if (!new RegExp(/^[a-zA-Z0-9]+$/g).test(req.body.short)) {
+    log(
+      `Error while creating link: shortcutIsntValid (${req.body.short})`,
+      true
+    );
+    return res.send({ ok: false, error: "shortcutIsntValid" });
   }
 
   //Check if the alias (shortcut) for the link already exist
   let rows = await getTheURL(req.body.short);
   if (rows.length !== 0) {
-    return res.json({ ok: false, message: "The account already exist" });
+    log(`Error while creating link: alreadyExist (${req.body.short})`, true);
+    return res.send({ ok: false, error: "alreadyExist" });
   } else {
     await createTheURL(req.body.short, req.body.full);
-    res.sendStatus(200);
+    return res.send({ ok: true });
   }
 });
 
@@ -66,6 +78,7 @@ function createTheURL(short: string, full: string): Promise<void> {
       [null, short, full, null, false, null],
       (err) => {
         if (err) reject(log(`Error while inserting into the database: ${err}`));
+        log(`Added new link to the database`);
         resolve();
       }
     );
