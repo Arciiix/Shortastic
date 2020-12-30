@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import path from "path";
 
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("./db.db", (err) => {
@@ -17,8 +18,8 @@ const PORT = process.env.PORT || 5434; //DEV
 //Risky and only during development
 const cors = require("cors");
 app.use(cors());
-
 app.use(bodyParser.json());
+app.use(express.static(path.join("build")));
 
 const appRoutes = ["/", "/summary", "/404"];
 
@@ -92,8 +93,7 @@ function createTheURL(short: string, full: string): Promise<void> {
 }
 
 app.all(appRoutes, (req, res) => {
-  //DEV TODO: Send the React app
-  res.send("DEV TODO");
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.get(

@@ -66,6 +66,8 @@ class Summary extends React.Component<any, SummaryState> {
             <a
               className={styles.generatedLinkLink}
               href={this.state.shortenedLink}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {this.state.shortenedLink}
             </a>
