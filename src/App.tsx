@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./components/Home/Home";
 import Summary from "./components/Summary/Summary";
+import NotFound from "./components/NotFound/NotFound";
 
 class App extends React.Component {
   render() {
@@ -17,6 +18,9 @@ class App extends React.Component {
             </Route>
             <Route exact path="/summary">
               <Summary />
+            </Route>
+            <Route exact path="/404">
+              <NotFound />
             </Route>
           </Switch>
         </Router>

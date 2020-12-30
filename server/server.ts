@@ -20,7 +20,7 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-const appRoutes = ["/", "/summary"];
+const appRoutes = ["/", "/summary", "/404"];
 
 app.post("/api/createShortenedLink", async (req, res) => {
   if (!req.body.short || !req.body.full) {
