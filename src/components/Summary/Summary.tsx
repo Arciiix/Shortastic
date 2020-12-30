@@ -14,7 +14,7 @@ class Summary extends React.Component<any, SummaryState> {
     super(props);
     this.state = {
       shortenedLink: "",
-      isLogged: true, //TODO DEV
+      isLogged: false, //TODO DEV
       accountName: "", //TODO DEV
     };
   }

@@ -32,7 +32,7 @@ class Home extends React.Component<any, HomeState> {
     }
 
     let request = await fetch(
-      `http://localhost:5434/api/createShortenedLink/`, //DEV: should be /api/createShortenedLink
+      `/api/createShortenedLink/`, //`http://localhost:5434/api/createShortenedLink/`
       {
         method: "POST",
         headers: {
