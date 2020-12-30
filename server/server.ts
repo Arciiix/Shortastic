@@ -28,8 +28,14 @@ app.post("/api/createShortenedLink", async (req, res) => {
     return res.send({ ok: false, error: "noParams" });
   }
 
+  /*
+  Old version:
   const urlRegExp = new RegExp(
     /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g
+  );
+  */
+  const urlRegExp = new RegExp(
+    /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/){1}[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/g
   );
 
   const ipRegExp = /^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\.(?!$)|$)){4}$/;
@@ -89,6 +95,20 @@ app.all(appRoutes, (req, res) => {
   //DEV TODO: Send the React app
   res.send("DEV TODO");
 });
+
+app.get(
+  "/:id",
+  async (req, res): Promise<void> => {
+    let shortenedLink = await getTheURL(req.params.id);
+
+    if (shortenedLink.length === 1) {
+      let fullLink: string = shortenedLink[0].fullLink;
+      res.redirect(fullLink);
+    } else {
+      res.redirect("/404");
+    }
+  }
+);
 
 function log(message: string, isError?: boolean): void {
   let parsedDate = new Date().toLocaleString(); //Parse the date into one of the available formats (e.g. yyyy-MM-dd HH:mm:ss)
