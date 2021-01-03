@@ -2,7 +2,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import path from "path";
 
-import { getTheURL, createTheURL } from "./database";
+//Choose between SQLite (stored locally) and MongoDB (stored in cloud) here
+//import { getTheURL, createTheURL } from "./sqlite";
+import { getTheURL, createTheURL } from "./mongodb";
 import { log } from "./log";
 
 const app = express();
