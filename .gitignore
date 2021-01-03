@@ -29,3 +29,4 @@ icon.psd
 # server
 /server/node_modules
 /server/dist
+server/db.db
